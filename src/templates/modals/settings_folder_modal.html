@@ -1,0 +1,33 @@
+<div class="modal fade" id="settingsFolder" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close btn btn-secondary"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'photos:crud_folder' %}" method="post">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <select name="folder_id" class="form-control form-control-sm">
+                        {% for folder in folders %}
+                        <option value="{{ folder.pk }}">{{ folder.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="exampleInputEmail1">Измените название папки</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                    <input type="hidden" name="user_id" value="{{ request.user.id }}"/>
+                    <input type="hidden" name="_method" value="patch">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning">Изменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

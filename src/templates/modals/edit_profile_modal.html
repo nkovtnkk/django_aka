@@ -1,0 +1,31 @@
+<div class="modal fade" id="editProfile" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close btn btn-secondary"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'users:update_user_params' %}" method="post">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <label for="exampleInputEmail1">Измените название аккаунта</label>
+                    <input type="text" name="username" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                    <label for="exampleInputEmail1">Измените название instagram аккаунта</label>
+                    <input type="text" name="inst_name" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp"
+                           placeholder="Enter email">
+                    <input type="hidden" name="user_id" value="{{ request.user.id }}"/>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="submit">Изменить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

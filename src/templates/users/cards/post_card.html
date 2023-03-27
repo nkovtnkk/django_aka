@@ -1,0 +1,18 @@
+<div class="card border-success mb-3" style="max-width: 18rem; margin: auto;">
+    <div class="card-header bg-transparent border-success">
+        <img src={{ photo.image.url }} width="150" class="card-img-top">
+    </div>
+    <div class="card-body text-success">
+        <h5 class="card-title">{{ photo.text }}</h5>
+    </div>
+    <div class="card-footer text-center bg-transparent border-success">
+        <form action="{% url 'photos:delete_post' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ photo.pk }}"/>
+            <input type="hidden" name="user_id" value="{{ request.user.id }}"/>
+            {% if current_user.pk == request.user.id %}
+            <button class="btn btn-danger text-center" type="submit" value="Delete">Удалить</button>
+            {% endif %}
+        </form>
+    </div>
+</div>

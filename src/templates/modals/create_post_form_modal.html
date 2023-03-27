@@ -1,0 +1,42 @@
+<div class="modal fade" id="createPost{{folder.pk}}" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close btn btn-secondary"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'photos:create_post' %}" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Выберите файл</label>
+                        <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Придумайте описание</label>
+                        <input type="text" name="text" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp"
+                               placeholder="Enter email">
+                    </div>
+<!--                    <select name="folder" class="form-control form-control-sm">-->
+<!--                        <option value="">Без папки</option>-->
+<!--                        {% for folder in folders %}-->
+<!--                        <option value="{{ folder.pk }}">{{ folder.name }}</option>-->
+<!--                        {% endfor %}-->
+<!--                    </select>-->
+                    <select name="folder" class="form-control form-control-sm" hidden>
+                        <option value="{{ folder.pk }}">{{ folder.name }}</option>
+                    </select>
+                    <input type="hidden" name="user" value="{{ request.user.id }}"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

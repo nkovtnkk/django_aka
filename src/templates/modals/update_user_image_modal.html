@@ -1,0 +1,27 @@
+<div class="modal fade" id="updateProfilePhoto" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close btn btn-secondary"
+                        data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'users:update_user_image' %}" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Выберите файл</label>
+                        <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                    <input type="hidden" name="user" value="{{ request.user.id }}"/>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="submit">Загрузить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

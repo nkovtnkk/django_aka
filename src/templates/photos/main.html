@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="card container text-center" style="width: 50%">
+    <div class="card-header">
+        {% if not request.user.is_authenticated %}
+        Что бы использовать данную функицю нужно авторизоваться
+        {% else %}
+        Вы можете зарандомить любого пользователя
+        {% endif %}
+    </div>
+    <div class="card-body">
+        {% if random_user %}
+        <a href="{{random_user.get_absolute_url}}">
+            <h5 class="card-title">{{random_user.username}}</h5>
+        </a>
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group text-center" style="margin: 5px">
+                {% if button_disabled or not request.user.is_authenticated %}
+                <button type="submit" class="btn btn-info" disabled>Рандомный аккаунт</button>
+                {% else %}
+                <button type="submit" class="btn btn-info">Рандомный аккаунт</button>
+                {% endif %}
+
+            </div>
+        </form>
+    </div>
+    {% if time_expired %}
+    <div class="card-footer text-muted">
+        Время разблокировки кнопки - {{ time_expired }}
+    </div>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
